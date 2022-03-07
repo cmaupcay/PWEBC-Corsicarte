@@ -1,0 +1,119 @@
+:root {
+    --col-0: #f3f3f3;
+    --col-1: #e5e5e5;
+    --col-2: #fca311;
+    --col-3: #14213d;
+    --col-4: #001524;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    font-family: 'Verdana', 'Geneva', 'Tahoma', 'sans-serif';
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--col-1);
+    color: var(--col-4);
+}
+
+header {
+    background-color: var(--col-4);
+    color: var(--col-0);
+    height: 8vh;
+    margin-bottom: 2vh;
+    padding: 2vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+header div#conteneur-titre {
+    width: 90%;
+}
+
+header div#conteneur-titre h1#titre {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3vh;
+    color: var(--col-1)
+}
+
+header div#conteneur-titre h1#titre span {
+    color: var(--col-0)
+}
+
+header div#conteneur-titre h1#titre:hover {
+    cursor: pointer;
+    letter-spacing: 4vh;
+    color: var(--col-0)
+}
+
+header div#conteneur-titre h1#titre:hover span {
+    color: var(--col-2)
+}
+
+header div#conteneur-nav {
+    width: 10%;
+}
+
+header div#conteneur-nav ul {
+    list-style: none;
+    line-height: 4vh;
+}
+
+header div#conteneur-nav ul li {
+    text-transform: lowercase;
+    font-style: italic;
+    letter-spacing: 0.5vh;
+    width: 100%;
+    color: var(--col-2)
+}
+
+header div#conteneur-nav ul li:hover {
+    cursor: pointer;
+    font-size: 1.3rem;
+}
+
+section#page {
+    height: 76vh;
+    margin: 0 4vw
+}
+
+footer {
+    background-color: var(--col-4);
+    color: var(--col-0);
+    height: 7vh;
+    margin-top: 1vh;
+    padding: 2vh;
+}
+
+footer div#credits ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    list-style: none;
+}
+
+footer div#credits ul li {
+    font-size: 0.9rem;
+    font-style: italic;
+    letter-spacing: 0.5vh;
+    width: 100%;
+    color: var(--col-2)
+}
+
+footer div#credits ul li:hover {
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+footer div#credits ul li#corse:hover {
+    transform: scale(1.1)
+}
