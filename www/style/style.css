@@ -22,6 +22,60 @@ body {
     color: var(--col-4);
 }
 
+section h1,
+section h2,
+section h3,
+section h4 {
+    color: var(--col-2);
+    text-transform: uppercase;
+    letter-spacing: 0.4rem;
+    margin: 0.4vh 0 0.2vh;
+}
+
+section p {
+    text-align: justify;
+    line-height: 1.4rem;
+}
+
+section.popup {
+    position: absolute;
+    background-color: rgba(0, 0, 0.2, 0.4);
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    opacity: 0%;
+    visibility: hidden;
+    display: grid;
+    grid-template-rows: 25% 50% 25%;
+}
+
+section.popup div#fenetre {
+    background-color: var(--col-1);
+    margin: 0 20vw;
+    padding: 3vh 5vw;
+    display: grid;
+    grid-template-rows: 85% 15%;
+}
+
+section.popup div#fenetre div#contenu {
+    overflow-y: auto;
+}
+
+section.popup div#fenetre h2#apis {
+    margin-top: 3vh;
+}
+
+section.popup div#fenetre h4#fermer {
+    color: var(--col-3);
+    margin-top: 2vh;
+    align-self: center;
+}
+
+section.popup div#fenetre h4#fermer:hover {
+    cursor: pointer;
+    letter-spacing: 0.8vw;
+}
+
 header {
     background-color: var(--col-4);
     color: var(--col-0);

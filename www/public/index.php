@@ -14,6 +14,46 @@
 
 </head>
 <body>
+
+    <!-- POPUP -->
+    <!-- Popup Aide -->
+    <section id="aide" class="popup">
+        <div></div>
+        <div id="fenetre">
+            <div id="contenu">
+                <h2 id="aide">Aide</h2>
+                <p>
+                    TODO Aide
+                </p>
+            </div>
+            <h4 id="fermer" for="aide">Fermer</h4>
+        </div>
+        <div></div>
+    </section>
+
+    <!-- Popup Informations -->
+    <section id="infos" class="popup">
+        <div></div>
+        <div id="fenetre">
+            <div id="contenu">
+                <h2 id="bibliotheques">Bibliothèques</h2>
+                <p>
+                    TODO Liste des bibliothèques
+                </p>
+                
+                <h2 id="apis">APIs</h2>
+                <p>
+                    TODO Liste des APIs
+                </p>
+            </div>
+            
+            <h4 id="fermer" for="infos">Fermer</h4>
+        </div>
+        <div></div>
+    </section>
+
+    <!-- PAGE -->
+    <!-- En-tête -->
     <header>
         <div id="conteneur-titre">
             <h1 id="titre"><span>Corsica</span>rte</h1>
@@ -28,10 +68,12 @@
         </div>
     </header>
     
+    <!-- Contenu -->
     <section id="page">
         <h1>jello</h1>
     </section>
 
+    <!-- Pied de page -->
     <footer>
         <div id="credits">
             <ul>

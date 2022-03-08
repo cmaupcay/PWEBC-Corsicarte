@@ -1,10 +1,13 @@
-function nav_clique_aide()
+function nav_clique_popup_ouvrir(e) 
 {
-    alert("// TODO Aide");
+    $("section#" + e.target.id).css("opacity", 100);
+    $("section#" + e.target.id).css("visibility", "visible");
 }
-function nav_clique_infos()
+function nav_clique_popup_fermer(e) 
 {
-    alert("// TODO Bibliothèques et APIs");
+    let cible = e.target.getAttribute("for");
+    $("section#" + cible).css("opacity", 0);
+    $("section#" + cible).css("visibility", "hidden");
 }
 
 function nav_charger()
@@ -14,8 +17,11 @@ function nav_charger()
         window.open("https://www.visit-corsica.com/");
     });
 
-    $("header div#conteneur-nav nav ul li#aide").click(nav_clique_aide);
-    $("header div#conteneur-nav nav ul li#infos").click(nav_clique_infos);
+    $("header div#conteneur-nav nav ul li#aide").click(nav_clique_popup_ouvrir);
+    $("section#aide div#fenetre #fermer").click(nav_clique_popup_fermer);
+
+    $("header div#conteneur-nav nav ul li#infos").click(nav_clique_popup_ouvrir);
+    $("section#infos div#fenetre #fermer").click(nav_clique_popup_fermer);
 
     // Petite promo
     $("footer div#credits ul li#prost").click(function() {
