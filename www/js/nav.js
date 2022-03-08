@@ -17,11 +17,11 @@ function nav_charger()
         window.open("https://www.visit-corsica.com/");
     });
 
-    $("header div#conteneur-nav nav ul li#aide").click(nav_clique_popup_ouvrir);
-    $("section#aide div#fenetre #fermer").click(nav_clique_popup_fermer);
+    $("header div#conteneur-nav nav ul li").click(nav_clique_popup_ouvrir);
+    $("section div#fenetre #fermer").click(nav_clique_popup_fermer);
 
-    $("header div#conteneur-nav nav ul li#infos").click(nav_clique_popup_ouvrir);
-    $("section#infos div#fenetre #fermer").click(nav_clique_popup_fermer);
+    // Inscription
+    // TODO fonction clique
 
     // Petite promo
     $("footer div#credits ul li#prost").click(function() {

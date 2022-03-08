@@ -20,6 +20,7 @@ body {
     width: 100vw;
     background-color: var(--col-1);
     color: var(--col-4);
+    min-width: 780px;
 }
 
 section h1,
@@ -46,7 +47,13 @@ section.popup {
     opacity: 0%;
     visibility: hidden;
     display: grid;
-    grid-template-rows: 25% 50% 25%;
+    grid-template-rows: 20% 60% 20%;
+    z-index: 1014;
+}
+
+section#auth.popup {
+    opacity: 100%;
+    visibility: visible;
 }
 
 section.popup div#fenetre {
@@ -55,6 +62,10 @@ section.popup div#fenetre {
     padding: 3vh 5vw;
     display: grid;
     grid-template-rows: 85% 15%;
+}
+
+section#auth.popup div#fenetre {
+    grid-template-rows: 1fr;
 }
 
 section.popup div#fenetre div#contenu {
@@ -74,6 +85,53 @@ section.popup div#fenetre h4#fermer {
 section.popup div#fenetre h4#fermer:hover {
     cursor: pointer;
     letter-spacing: 0.8vw;
+}
+
+section form {
+    margin: 2vh 0;
+    padding: 0 1vh;
+    display: grid;
+    grid-row-gap: 2vh;
+}
+
+section form label {
+    text-transform: uppercase;
+    letter-spacing: 0.3vw;
+    font-size: 1.2rem;
+}
+
+section form input {
+    text-align: center;
+    color: var(--col-4);
+    border-radius: 0.4rem;
+    border: none;
+    padding: 0.3vw 0.6vh;
+}
+
+section form input[type=text],
+section form input[type=password] {
+    background-color: var(--col-0);
+    padding: 0.7vw 1vh;
+    font-size: 1.1rem;
+}
+
+section form input[type=submit],
+section button {
+    margin-top: 1.5vh;
+    padding: 1vw 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.15vw;
+    cursor: pointer;
+    background-color: var(--col-3);
+    color: var(--col-2);
+}
+
+section form input[type=submit]:hover,
+section button:hover {
+    background-color: var(--col-2);
+    color: var(--col-3);
 }
 
 header {
@@ -137,6 +195,10 @@ header div#conteneur-nav ul li:hover {
 section#page {
     height: 76vh;
     margin: 0 4vw
+}
+
+section#page div#map {
+    height: 100%;
 }
 
 footer {
