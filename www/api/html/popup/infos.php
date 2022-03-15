@@ -1,16 +1,12 @@
-
     <!-- Popup Informations -->
             <div id="contenu">
-                <?php HTML::importer_script('popup/infos'); ?>
                 <h2 id="bibliotheques">Bibliothèques</h2>
                 <p>
                     TODO Liste des bibliothèques
                 </p>
                 
-                <h2 id="apis">APIs</h2>
+                <h2 id="apis">Données ouvertes</h2>
                 <p>
-                    TODO Liste des APIs
+                    TODO Liste des fournisseurs de données ouvertes
                 </p>
             </div>
-            
-            <h4 id="fermer" for="infos">Fermer</h4>

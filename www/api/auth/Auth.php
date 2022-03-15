@@ -54,7 +54,7 @@ abstract class Auth
         return false;
     }
 
-    public static function inscire_auth(int $id, string $mdp) : bool
+    public static function inscire_auth(string $id, string $mdp) : bool
     {
         $fichier_u = self::DOSSIER_U . self::_hash($id);
         if (file_exists($fichier_u) && file($fichier_u)[0] == self::_hash($mdp))

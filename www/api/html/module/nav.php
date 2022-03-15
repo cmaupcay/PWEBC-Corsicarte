@@ -5,7 +5,10 @@
     <section id="popup">
         <div></div>
         <div id="fenetre">
-            <!-- Contenu du popup dynamique. -->
+            <div id="contenu">
+                <!-- Contenu du popup dynamique. -->
+            </div>
+            <h4 id="fermer" for="infos">Fermer</h4>
         </div>
         <div></div>
     </section>
@@ -18,7 +21,7 @@
         <div id="conteneur-nav">
             <nav>
                 <ul>
-                    <li id="aide">Aide</li>
+                    <li id="auth">Profil</li>
                     <li id="infos">Infos</li>
                 </ul>
             </nav>

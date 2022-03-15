@@ -56,7 +56,7 @@ section#popup div#fenetre {
     margin: 0 20vw;
     padding: 3vh 5vw;
     display: grid;
-    grid-template-rows: 85% 15%;
+    grid-template-rows: 87% 13%;
 }
 
 section#popup div#fenetre div#contenu {

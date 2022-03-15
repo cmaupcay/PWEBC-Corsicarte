@@ -1,4 +1,4 @@
-
+<?php include_once __DIR__ . '/../../auth/Auth.php'; ?>
     <!-- Popup Connexion -->
             <div id="contenu">
                 <h2 id="bibliotheques">Connexion</h2>
