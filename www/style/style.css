@@ -47,7 +47,7 @@ section#popup {
     opacity: 0%;
     visibility: hidden;
     display: grid;
-    grid-template-rows: 20% 60% 20%;
+    grid-template-rows: 17.5% 65% 17.5%;
     z-index: 1014;
 }
 
@@ -76,6 +76,13 @@ section#popup div#fenetre h4#fermer {
 section#popup div#fenetre h4#fermer:hover {
     cursor: pointer;
     letter-spacing: 0.8vw;
+}
+
+section#popup div#fenetre div#contenu div#vue-inscription
+{
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
 }
 
 section form {

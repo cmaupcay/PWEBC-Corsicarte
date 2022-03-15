@@ -6,12 +6,8 @@ abstract class Auth
     private const DOSSIER_S = __DIR__ . '/data/s/';
     private const ALGO_HASH = 'sha256';
 
-    const I_ID = 'id';
-    const I_MDP = 'mdp';
-
-    const I_DECO = 'deco'; // Deconnexion
-    const I_CONNEXION = 'connexion'; // Identifiant du boutton de connexion
-    const I_INSCRIPTION = 'inscription'; // Identifiant du boutton d'inscription
+    const ID = 'id';
+    const MDP = 'mdp';
 
     private static function _hash(string $data)
     { return hash(self::ALGO_HASH, $data); }
@@ -54,12 +50,12 @@ abstract class Auth
         return false;
     }
 
-    public static function inscire_auth(string $id, string $mdp) : bool
+    public static function inscire_auth(string $id, string $mdp, string $adresse) : bool
     {
         $fichier_u = self::DOSSIER_U . self::_hash($id);
         if (file_exists($fichier_u) && file($fichier_u)[0] == self::_hash($mdp))
         {
-            $fichier_s = self::DOSSIER_S . self::_hash($_SERVER['REMOTE_ADDR']);
+            $fichier_s = self::DOSSIER_S . self::_hash($adresse);
             $fichier_s = fopen($fichier_s, 'w');
             if ($fichier_s)
             {
@@ -71,9 +67,9 @@ abstract class Auth
         return false;
     }
 
-    public static function deconnexion() : bool
+    public static function deconnexion(string $adresse) : bool
     {
-        $fichier_s = self::DOSSIER_S . self::_hash($_SERVER['REMOTE_ADDR']);
+        $fichier_s = self::DOSSIER_S . self::_hash($adresse);
         if (file_exists($fichier_s)) 
         {
             unlink($fichier_s);
@@ -82,21 +78,11 @@ abstract class Auth
         return false;
     }
 
-    public static function verifier_auth()
+    public static function verifier_auth(string $adresse)
     {
-        $fichier_s = self::DOSSIER_S . self::_hash($_SERVER['REMOTE_ADDR']);
+        $fichier_s = self::DOSSIER_S . self::_hash($adresse);
         if (file_exists($fichier_s))
             return file($fichier_s);
         return false;
-    }
-
-    public static function recevoir_auth() : void
-    {
-        // Deconnexion
-        if (isset($_POST[self::I_DECO]))
-            self::deconnexion();
-        // Connexion
-        if (isset($_POST[self::I_ID]) && isset($_POST[self::I_MDP]) && isset($_POST[self::I_CONNEXION]))
-            self::inscire_auth($_POST[self::I_ID], $_POST[self::I_MDP]);
     }
 }
