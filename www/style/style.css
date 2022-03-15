@@ -38,7 +38,7 @@ section p {
     line-height: 1.4rem;
 }
 
-section.popup {
+section#popup {
     position: absolute;
     background-color: rgba(0, 0, 0.2, 0.4);
     height: 100vh;
@@ -51,12 +51,7 @@ section.popup {
     z-index: 1014;
 }
 
-section#auth.popup {
-    opacity: 100%;
-    visibility: visible;
-}
-
-section.popup div#fenetre {
+section#popup div#fenetre {
     background-color: var(--col-1);
     margin: 0 20vw;
     padding: 3vh 5vw;
@@ -64,25 +59,21 @@ section.popup div#fenetre {
     grid-template-rows: 85% 15%;
 }
 
-section#auth.popup div#fenetre {
-    grid-template-rows: 1fr;
-}
-
-section.popup div#fenetre div#contenu {
+section#popup div#fenetre div#contenu {
     overflow-y: auto;
 }
 
-section.popup div#fenetre h2#apis {
+section#popup div#fenetre h2#apis {
     margin-top: 3vh;
 }
 
-section.popup div#fenetre h4#fermer {
+section#popup div#fenetre h4#fermer {
     color: var(--col-3);
     margin-top: 2vh;
     align-self: center;
 }
 
-section.popup div#fenetre h4#fermer:hover {
+section#popup div#fenetre h4#fermer:hover {
     cursor: pointer;
     letter-spacing: 0.8vw;
 }
@@ -116,6 +107,7 @@ section form input[type=password] {
 }
 
 section form input[type=submit],
+section form input[type=button],
 section button {
     margin-top: 1.5vh;
     padding: 1vw 0;
@@ -129,6 +121,7 @@ section button {
 }
 
 section form input[type=submit]:hover,
+section form input[type=button]:hover,
 section button:hover {
     background-color: var(--col-2);
     color: var(--col-3);

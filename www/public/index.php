@@ -1,28 +1,10 @@
 <?php
-    include_once '../sys/Auth.php';
-    include_once '../sys/HTML.php';
+    include_once '../api/auth/Auth.php';
+    include_once '../api/html/HTML.php';
 
-    include 'module/entete.php';
-
+    // TODO utiliser API via javascript
     Auth::recevoir_auth();
     $u = Auth::verifier_auth();
-    if (!$u)
-    {     
-        include 'module/popup/aide.php';
-        include 'module/popup/infos.php';
-    
-        include 'module/nav.php';
 
-        include 'module/map.php';
-    }
-    else
-    {
-        include 'module/popup/auth.php';
-
-        include 'module/nav.php';
-
-        // Remplissage de la page
-        print('<section id="page"></section>');
-    }
-
-    include 'module/pied.php';
+    $MODULES = ['entete', 'nav', 'map', "pied"];
+    foreach ($MODULES as $m) HTML::module($m);

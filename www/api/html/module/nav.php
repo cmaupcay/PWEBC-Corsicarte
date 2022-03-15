@@ -1,5 +1,15 @@
 
     <!-- PAGE -->
+
+    <!-- Popup -->
+    <section id="popup">
+        <div></div>
+        <div id="fenetre">
+            <!-- Contenu du popup dynamique. -->
+        </div>
+        <div></div>
+    </section>
+    
     <!-- Navigation -->
     <header>
         <div id="conteneur-titre">

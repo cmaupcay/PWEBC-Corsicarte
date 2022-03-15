@@ -2,8 +2,8 @@
 
 abstract class Auth
 {
-    private const DOSSIER_U = __DIR__ . '/id/u/';
-    private const DOSSIER_S = __DIR__ . '/id/s/';
+    private const DOSSIER_U = __DIR__ . '/data/u/';
+    private const DOSSIER_S = __DIR__ . '/data/s/';
     private const ALGO_HASH = 'sha256';
 
     const I_ID = 'id';
@@ -13,17 +13,17 @@ abstract class Auth
     const I_CONNEXION = 'connexion'; // Identifiant du boutton de connexion
     const I_INSCRIPTION = 'inscription'; // Identifiant du boutton d'inscription
 
-    private static function _hash($data)
+    private static function _hash(string $data)
     { return hash(self::ALGO_HASH, $data); }
 
-    static function existe_u($id)
+    public static function existe_u(int $id) : bool
     {
         $id = self::_hash($id);
         $fichier_u = self::DOSSIER_U . $id;
         return file_exists($fichier_u);
     }
 
-    static function nouveau_u($id, $mdp)
+    public static function nouveau_u(int $id, string $mdp) : bool
     {
         if ($id === '' || $mdp === '') return false;
         $id = self::_hash($id);
@@ -41,7 +41,7 @@ abstract class Auth
         return false;
     }
 
-    static function supprimer_u($id)
+    public static function supprimer_u(int $id) : bool
     {
         $id = self::_hash($id);
         $fichier_u = self::DOSSIER_U . $id;
@@ -54,7 +54,7 @@ abstract class Auth
         return false;
     }
 
-    private static function _inscire_auth($id, $mdp)
+    public static function inscire_auth(int $id, string $mdp) : bool
     {
         $fichier_u = self::DOSSIER_U . self::_hash($id);
         if (file_exists($fichier_u) && file($fichier_u)[0] == self::_hash($mdp))
@@ -65,36 +65,38 @@ abstract class Auth
             {
                 fwrite($fichier_s, self::_hash($id));
                 fclose($fichier_s);
+                return true;
             }
         }
-    }
-
-    private static function _deconnexion()
-    {
-        $fichier_s = self::DOSSIER_S . self::_hash($_SERVER['REMOTE_ADDR']);
-        if (file_exists($fichier_s)) unlink($fichier_s);
-    }
-
-    static function verifier_auth()
-    {
-        $fichier_s = self::DOSSIER_S . self::_hash($_SERVER['REMOTE_ADDR']);
-        if (file_exists($fichier_s))
-            return file($fichier_s)[0];
         return false;
     }
 
-    static function recevoir_auth()
+    public static function deconnexion() : bool
+    {
+        $fichier_s = self::DOSSIER_S . self::_hash($_SERVER['REMOTE_ADDR']);
+        if (file_exists($fichier_s)) 
+        {
+            unlink($fichier_s);
+            return true;
+        }
+        return false;
+    }
+
+    public static function verifier_auth()
+    {
+        $fichier_s = self::DOSSIER_S . self::_hash($_SERVER['REMOTE_ADDR']);
+        if (file_exists($fichier_s))
+            return file($fichier_s);
+        return false;
+    }
+
+    public static function recevoir_auth() : void
     {
         // Deconnexion
         if (isset($_POST[self::I_DECO]))
-            self::_deconnexion();
+            self::deconnexion();
         // Connexion
-        if (isset($_POST[self::I_ID]) && isset($_POST[self::I_MDP]) && isset($_POST[self::I_FORM]))
-            self::_inscire_auth($_POST[self::I_ID], $_POST[self::I_MDP]);
-    }
-
-    static function bouton_deconnexion()
-    {
-        print("<br><form method=\"post\"><input type=\"submit\" class=\"erreur\" name=\"" . self::I_DECO . "\" value=\"Deconnexion\"></form>\n");
+        if (isset($_POST[self::I_ID]) && isset($_POST[self::I_MDP]) && isset($_POST[self::I_CONNEXION]))
+            self::inscire_auth($_POST[self::I_ID], $_POST[self::I_MDP]);
     }
 }
