@@ -1,5 +1,5 @@
 const ID_COOKIE = "id";
-function identifie() { return !!$.cookie(ID_COOKIE); }
+function identifie() { return $.cookie(ID_COOKIE) != null; }
 
 function erreur(msg) 
 { $("form.auth p#erreur").html(msg); } 
@@ -110,6 +110,7 @@ function connexion()
                 mdp: $("#vue-connexion form.auth input#mdp").val()
             },
             success: (retour) => {
+                $("#vue-connexion form.auth input#mdp").val("");
                 if (retour.succes)
                 {
                     $.cookie(ID_COOKIE, id, { expires: 14, path: '/', domain: 'localhost', secure: true });
@@ -141,7 +142,7 @@ function deconnexion()
             }
             else { console.error("Impossible d'opérer la déconnexion."); }
         },
-        error: (err) => { erreur("Impossible de procéder à la déconnexion : " + err.status) },
+        error: (err) => { console.error("Impossible de procéder à la déconnexion : " + err.status) },
         complete: () => { $(this).prop("disabled", false); }
     });
 }
@@ -155,11 +156,12 @@ function verifier()
             type: "GET",
             dataType: "json",
             url: AUTH_API + "verif.php",
+            async: false,
             success: (retour) => {
                 verifie = retour.succes;
                 if (!verifie) $.cookie(ID_COOKIE, null, { expires: 0, path: '/', domain: 'localhost', secure: true });
             },
-            error: (err) => { erreur("Impossible de procéder à la vérification : " + err.status) }
+            error: (err) => { console.error("Impossible de procéder à la vérification : " + err.status) }
         });
     }
     return verifie;

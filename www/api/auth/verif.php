@@ -6,7 +6,7 @@ function verif(array $arguments) : bool
 {
     header('Content-Type: application/json');
     $rep = [
-        Auth::SUCCES => Auth::verifier_auth($_SERVER['REMOTE_ADDR'])
+        Auth::SUCCES => (Auth::verifier_auth($_SERVER['REMOTE_ADDR']) !== false)
     ];
     print(json_encode($rep));
     return true;
