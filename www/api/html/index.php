@@ -4,6 +4,7 @@ include_once  __DIR__ . '/../API.php';
 
 function controle(array $arguments) : bool
 {
+    header('Content-Type: text/html');
     if (count($arguments) === 2)
     {
         $type = $arguments[HTML::API_TYPE];

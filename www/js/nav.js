@@ -12,6 +12,7 @@ function popup_charger(nom)
 {
     $.ajax({
         type: "GET",
+        dataType: "html",
         url: "../api/html/?type=popup&cible=" + nom,
         success: function(retour) 
         { 
@@ -27,30 +28,21 @@ function popup_charger(nom)
         }
     });
 }
-function popup_ouvrir(e)
+function popup_ouvrir(id)
 {
-    popup_charger(e.target.id);
+    popup_charger(id);
     $(POPUP_DIV).css("opacity", 100);
     $(POPUP_DIV).css("visibility", "visible");
 }
 
+function lien(cible) { $(cible).click(function() { window.open($(this).attr("href")); }); }
+
 export function charger()
 {
     // Le titre et le logo du footer ont la même fonction de clique.
-    $("header div#conteneur-titre h1#titre, footer div#credits ul li#corse").click(function() {
-        window.open("https://www.visit-corsica.com/");
-    });
+    lien("header div#conteneur-titre h1#titre, footer div#credits ul li#corse");
     // Application des actions aux éléments du menu de navigation.
-    $("header div#conteneur-nav nav ul li").click(popup_ouvrir);
-
-    // Inscription
-    // TODO fonction clique
-
+    $("header div#conteneur-nav nav ul li").click(function(e) { popup_ouvrir(e.target.id); });
     // Petite promo
-    $("footer div#credits ul li#prost").click(function() {
-        window.open("https://github.com/Arpharnator");
-    })
-    $("footer div#credits ul li#mauperon").click(function() {
-        window.open("https://github.com/tensaiji");
-    })
+    lien("footer div#credits ul li#prost, footer div#credits ul li#mauperon");
 }

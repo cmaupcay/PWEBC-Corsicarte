@@ -8,18 +8,20 @@ abstract class Auth
 
     const ID = 'id';
     const MDP = 'mdp';
+    const MSG = 'msg';
+    const SUCCES = "succes";
 
     private static function _hash(string $data)
     { return hash(self::ALGO_HASH, $data); }
 
-    public static function existe_u(int $id) : bool
+    public static function existe_u(string $id) : bool
     {
         $id = self::_hash($id);
         $fichier_u = self::DOSSIER_U . $id;
         return file_exists($fichier_u);
     }
 
-    public static function nouveau_u(int $id, string $mdp) : bool
+    public static function nouveau_u(string $id, string $mdp) : bool
     {
         if ($id === '' || $mdp === '') return false;
         $id = self::_hash($id);
@@ -37,14 +39,14 @@ abstract class Auth
         return false;
     }
 
-    public static function supprimer_u(int $id) : bool
+    public static function supprimer_u(string $id, string $adresse) : bool
     {
         $id = self::_hash($id);
         $fichier_u = self::DOSSIER_U . $id;
         if (file_exists($fichier_u))
         {
             $suppression = unlink($fichier_u);
-            if ($_SESSION[self::I_ID] == $id) self::_deconnexion();
+            if ($_SESSION[self::ID] == $id) self::deconnexion($adresse);
             return $suppression;
         }
         return false;

@@ -78,11 +78,13 @@ section#popup div#fenetre h4#fermer:hover {
     letter-spacing: 0.8vw;
 }
 
+section#popup div#fenetre div#contenu div.vues { display: none; }
+
 section#popup div#fenetre div#contenu div#vue-inscription
 {
     opacity: 0;
     visibility: hidden;
-    height: 0;
+    display: none;
 }
 
 section form {
@@ -111,6 +113,7 @@ section form input[type=password] {
     background-color: var(--col-0);
     padding: 0.7vw 1vh;
     font-size: 1.1rem;
+    user-select: text;
 }
 
 section form input[type=submit],
@@ -132,6 +135,13 @@ section form input[type=button]:hover,
 section button:hover {
     background-color: var(--col-2);
     color: var(--col-3);
+}
+
+section form p#erreur
+{
+    text-align: center;
+    margin-bottom: -2.5rem;
+    color: red;
 }
 
 header {
