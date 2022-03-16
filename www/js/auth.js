@@ -8,9 +8,9 @@ const ID_MIN = 3;
 const ID_MAX = 32;
 const ID_REGEX = /^[a-zA-Z0-9_]*$/;
 var ID_VALIDE = false;
-function valider_id()
+function valider_id(entree)
 {
-    let id = $(this).val();
+    let id = entree.val();
     if (id.length == 0) erreur("");
     else if (id.length < ID_MIN || id.length > ID_MAX) { erreur("L'identifiant doit faire entre " + ID_MIN + " et " + ID_MAX + " caractères."); }
     else if (ID_REGEX.test(id))
@@ -27,9 +27,9 @@ function valider_id()
 const MDP_MIN = 7;
 const MDP_MAX = 256;
 var MDP_VALIDE = false;
-function valider_mdp()
+function valider_mdp(entree)
 {
-    let mdp = $(this).val();
+    let mdp = entree.val();
     if (mdp.length == 0) erreur("");
     else if (mdp.length < MDP_MIN || mdp.length > MDP_MAX) { erreur("Le mot de passe doit faire entre " + MDP_MIN + " et " + MDP_MAX + " caractères."); }
     else
@@ -42,10 +42,10 @@ function valider_mdp()
 }
 
 var MDP2_VALIDE = false;
-function revalider_mdp()
+function revalider_mdp(entree_mdp, entree_mdp2)
 {
-    let mdp = $("#vue-inscription form.auth input#mdp").val();
-    let mdp2 = $("#vue-inscription form.auth input#mdp-2").val();
+    let mdp = entree_mdp.val();
+    let mdp2 = entree_mdp2.val();
     if (mdp.length == 0 || mdp2.length == 0) erreur("");
     else if (mdp == mdp2)
     {
@@ -64,9 +64,9 @@ function effacer_formulaires()
 }
 
 const AUTH_API = "../api/auth/";
-function inscription()
+function inscription(bouton, entree_id, entree_mdp, bouton_succes)
 {   
-    $(this).prop("disabled", true);
+    bouton.prop("disabled", true);
     if (ID_VALIDE && MDP_VALIDE && MDP2_VALIDE)
     {
         $.ajax({
@@ -74,8 +74,8 @@ function inscription()
             dataType: "json",
             url: AUTH_API + "inscription.php",
             data: {
-                id: $("#vue-inscription form.auth input#id").val(),
-                mdp: $("#vue-inscription form.auth input#mdp").val()
+                id: entree_id.val(),
+                mdp: entree_mdp.val()
             },
             success: (retour) => {
                 if (retour.succes)
@@ -84,52 +84,52 @@ function inscription()
                     MDP_VALIDE = false;
                     MDP2_VALIDE = false;
                     effacer_formulaires();
-                    $("#vue-inscription form.auth input#connexion-aff").click();
+                    bouton_succes.click();
                 }
                 else { erreur(retour.msg); }
             },
             error: (err) => { erreur("Impossible de procéder à l'inscription : " + err.status); },
-            complete: () => { $(this).prop("disabled", false); }
+            complete: () => { bouton.prop("disabled", false); }
         });
     }
     else { erreur("Veuillez compléter le formulaire."); }
 }
 
-function connexion()
+function connexion(bouton, entree_id, entree_mdp, bouton_succes)
 {
-    $(this).prop("disabled", true);
+    bouton.prop("disabled", true);
     if (ID_VALIDE && MDP_VALIDE)
     {
-        let id = $("#vue-connexion form.auth input#id").val();
+        let id = entree_id.val();
         $.ajax({
             type: "POST",
             dataType: "json",
             url: AUTH_API + "connexion.php",
             data: {
                 id: id,
-                mdp: $("#vue-connexion form.auth input#mdp").val()
+                mdp: entree_mdp.val()
             },
             success: (retour) => {
-                $("#vue-connexion form.auth input#mdp").val("");
+                entree_mdp.val("");
                 if (retour.succes)
                 {
                     $.cookie(ID_COOKIE, id, { expires: 14, path: '/', domain: 'localhost', secure: true });
                     ID_VALIDE = false;
                     MDP_VALIDE = false;
-                    $("section#popup #fermer").click();
+                    bouton_succes.click();
                 }
                 else { erreur(retour.msg); }
             },
             error: (err) => { erreur("Impossible de procéder à la connexion : " + err.status) },
-            complete: () => { $(this).prop("disabled", false); }
+            complete: () => { bouton.prop("disabled", false); }
         });
     }
     else { erreur("Veuillez compléter le formulaire."); }
 }
 
-function deconnexion()
+function deconnexion(bouton, bouton_succes)
 {
-    $(this).prop("disabled", true);
+    bouton.prop("disabled", true);
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -138,12 +138,12 @@ function deconnexion()
             if (retour.succes)
             {
                 $.cookie(ID_COOKIE, null, { expires: 0, path: '/', domain: 'localhost', secure: true });
-                $("section#popup #fermer").click();
+                bouton_succes.click();
             }
             else { console.error("Impossible d'opérer la déconnexion."); }
         },
         error: (err) => { console.error("Impossible de procéder à la déconnexion : " + err.status) },
-        complete: () => { $(this).prop("disabled", false); }
+        complete: () => { bouton.prop("disabled", false); }
     });
 }
 
