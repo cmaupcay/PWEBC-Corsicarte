@@ -2,25 +2,52 @@ const CARTE = L.map('carte');
 const NOMINATIM = "https://nominatim.openstreetmap.org/";
 const NOMINATIM_FORMAT = "json";
 const NOMINATIM_EMAIL = "clement.mauperon@etu.u-paris.fr";
-const NOMINATIM_LANG = "fr";
+const LANG = "fr";
 
 // OUTILS
+const API_METEO = "https://api.openweathermap.org/data/2.5/weather";
+const API_METEO_CLE = "172db72f02be808e3a363fe978c19bb9";
+const API_METEO_UNITES = "metric";
+function meteo(lat, lon)
+{
+    let html = '';
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: API_METEO,
+        data: {
+            lat: lat,
+            lon: lon,
+            appid: API_METEO_CLE,
+            lang: LANG,
+            units: API_METEO_UNITES
+        },
+        success: (retour) => {
+            html = '<b>Temps : </b>' + retour.weather[0].description
+            + ' <b style="margin-left: 1vw">Température : </b>' + retour.main.temp + '°C';
+        },
+        error: (err) => { html = "<i>Impossible de récupérer les informations météorologiques (" + err.status + ")." },
+        complete: () => {
+            let infos = $(INFOS);
+            infos.html(infos.html() + '<br>' + html);
+        }
+    });
+}
 const INFOS = "section#page #carte-infos #infos-m";
 const INFOS_DEF = "<i>Sélectionner un point pour obtenir plus de détails.</i>";
 var INFOS_ACTIVE = undefined;
-function effacer_infos() 
-{
-    $(INFOS).html(INFOS_DEF);
-    INFOS_ACTIVE = undefined;
-}
 function infos(e)
 {
     let infos = $(INFOS);
-    if (e.latlng === INFOS_ACTIVE) { effacer_infos(); }
+    if (INFOS_ACTIVE === e.latlng)
+    { 
+        INFOS_ACTIVE = undefined;
+        $(INFOS).html(INFOS_DEF);
+    }
     else
     {
         INFOS_ACTIVE = e.latlng;
-        infos.html("<i>Résoulution de l'adresse...</i>");
+        infos.html("<i>Chargement des informations...</i>");
         $.ajax({
             type: "GET",
             dataType: "json",
@@ -28,7 +55,7 @@ function infos(e)
             data: {
                 format: NOMINATIM_FORMAT,
                 email: NOMINATIM_EMAIL,
-                "accept-language": NOMINATIM_LANG,
+                "accept-language": LANG,
                 lat: e.latlng.lat,
                 lon: e.latlng.lng
             },
@@ -36,6 +63,7 @@ function infos(e)
                 let adresse = retour.display_name.split(', ');
                 for (let i = 0; i < 4; i++) { adresse.pop(); } // Suppression des régions (Corse, France métropolitaine), du pays et du code postal (rajouté ensuite).
                 infos.html(adresse.join(', ') + (!!retour.address.postcode ? ' (' + retour.address.postcode + ')' : ''));
+                meteo(e.latlng.lat, e.latlng.lng); // Récupération des données météos (que si adresse résolue).
             },
             error: (err) => {
                 infos.html("<i>Impossible de résoudre l'adresse du point (" + err.status + ").");
@@ -46,7 +74,7 @@ function infos(e)
 }
 function charger_outils_carte()
 {
-    effacer_infos(); // Affichage de la valeur par défaut.
+    $(INFOS).html(INFOS_DEF); // Affichage de la valeur par défaut.
 }
 
 // CONTENU
@@ -74,7 +102,7 @@ function points_api(groupe, url, titre, icone, contenu, geo)
                     m.bindPopup(L.popup({
                         closeButton: false,
                         closeOnClick: false
-                    }).setContent(c)).on('remove', effacer_infos);
+                    }).setContent(c));
                     m.bindTooltip(t);
                     groupe.addLayer(m);
                 }

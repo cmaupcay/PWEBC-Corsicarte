@@ -19,7 +19,6 @@
                     </li>
                     <li>
                         <button id="leaflet" href="https://leafletjs.com/">Leaflet.markercluster</button>
-                        <p>Formation automatique de groupe de marqueurs.</p>
                     </li>
                 </ul>
                 
@@ -32,6 +31,14 @@
                     <li>
                         <button id="odc" href="https://www.data.corsica/">OpendataCorsica</button>
                         <p>Points d'interêts et données associées.</p>
+                    </li>
+                    <li>
+                        <button id="nominatim" href="https://nominatim.openstreetmap.org/">Nominatim (OSM)</button>
+                        <p>Résolution d'adresse et recherche de coordonées.</p>
+                    </li>
+                    <li>
+                        <button id="owm" href="https://openweathermap.org/">OpenWeatherMap</button>
+                        <p>Données météorologiques.</p>
                     </li>
                 </ul>
             </div>
