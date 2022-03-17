@@ -87,9 +87,9 @@ function points_api(groupe, url, titre, icone, contenu, geo)
         url: url,
         success: (retour) => {
         retour.records.forEach(ligne => {
+                let t = titre(ligne.fields);
                 let c = contenu(ligne.fields);
                 let g = geo(ligne.fields);
-                let t = titre(ligne.fields);
                 if (!!c && !!g && !!t)
                 {
                     let m = L.marker(g, {
@@ -153,10 +153,26 @@ function points_cult(groupe)
     points_api(
         groupe,
         API_CULT,
-        (e) => { e.nom; },
+        (e) => { return e.nom; },
         ICONE_CULT,
         (e) => {
             return "<b>" + e.nom + "</b><br><i>" + e.lieu + "<br>" + (e.categorie ? e.categorie : 'Non classé') + "</i>" ;
+        },
+        (e) => { return e.localisation; }
+    );
+}
+// Loisirs
+const API_LOI = "https://www.data.corsica/api/records/1.0/search/?dataset=etablissementsloisirs&rows=233";
+const ICONE_LOI = "loi";
+function points_loi(groupe) 
+{
+    points_api(
+        groupe,
+        API_LOI,
+        (e) => { return e.enseigne; },
+        ICONE_LOI,
+        (e) => {
+            return "<b>" + e.enseigne + "</b><br><i>" + e.lieu + "<br>" + (e.categorie ? e.categorie : 'Non classé') + "</i>" ;
         },
         (e) => { return e.localisation; }
     );
@@ -174,6 +190,7 @@ function charger_contenu_carte()
     points_hr(points);
     points_nat(points);
     points_cult(points);
+    points_loi(points);
 }
 
 // CARTE
