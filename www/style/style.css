@@ -88,11 +88,33 @@ section#popup div#fenetre div#contenu div#vue-inscription {
     display: none;
 }
 
+section#popup div#fenetre div#contenu p.plein { padding-bottom: 2vh; }
+
+section form,
+section ul.boutons {
+    padding: 0 1vw;
+    display: grid;
+}
 section form {
     margin: 2vh 0;
-    padding: 0 1vh;
-    display: grid;
     grid-row-gap: 2vh;
+}
+section ul.boutons {
+    list-style: none;
+    grid-row-gap: 1vh;
+    margin: 1vh 0 2vh;
+}
+section ul.boutons li p {
+    font-style: italic;
+    text-align: center;
+    font-size: 0.85rem;
+}
+section ul.boutons li button {
+    width: 77%;
+    padding: 0.7vh 0;
+}
+section ul.boutons li button:hover {
+    width: 99%;
 }
 
 section form label {
@@ -101,18 +123,19 @@ section form label {
     font-size: 1.2rem;
 }
 
-section form input {
+section form input,
+section button {
     text-align: center;
     color: var(--col-4);
     border-radius: 0.4rem;
     border: none;
-    padding: 0.3vw 0.6vh;
+    padding: 0.3vh 0.6vw;
 }
 
 section form input[type=text],
 section form input[type=password] {
     background-color: var(--col-0);
-    padding: 0.7vw 1vh;
+    padding: 0.7vh 1vw;
     font-size: 1.1rem;
     user-select: text;
 }
@@ -120,15 +143,18 @@ section form input[type=password] {
 section form input[type=submit],
 section form input[type=button],
 section button {
-    margin-top: 1.5vh;
-    padding: 1vw 0;
-    font-size: 1.2rem;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.15vw;
     cursor: pointer;
     background-color: var(--col-3);
     color: var(--col-2);
+}
+section form input[type=submit],
+section form input[type=button] {
+    margin-top: 1.5vh;
+    font-size: 1.2rem;
+    padding: 1vh 0;
 }
 
 section form input[type=submit]:hover,

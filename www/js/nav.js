@@ -23,7 +23,7 @@ function popup_charger(nom)
                 type: "GET",
                 url: POPUP_JS_DOSSIER + nom + ".js",
                 // ATTENTION : il s'agit d'une injection de script, un message est donc affiché en console.
-                success: function(retour) { eval(retour); }
+                success: function(js) { eval(js); }
             });
         }
     });
@@ -35,7 +35,7 @@ function popup_ouvrir(id)
     $(POPUP_DIV).css("visibility", "visible");
 }
 
-function lien(cible) { $(cible).click(function() { window.open($(this).attr("href")); }); }
+function lien(cible) { $(cible).click(function() { window.open($(this).attr("href")); }); console.log($(cible).attr("href")) }
 
 function charger()
 {

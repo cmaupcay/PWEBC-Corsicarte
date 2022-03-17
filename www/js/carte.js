@@ -1,38 +1,4 @@
 const CARTE = L.map('carte');
-const ZOOM_MIN = 8;
-const NOMINATIM = "https://nominatim.openstreetmap.org/";
-function charger_carte()
-{
-    // Paramètrage de la carte via Nominatim.
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: NOMINATIM + "search",
-        data: {
-            format: "json",
-            "accept-language": "fr-fr",
-            q: "corse",
-            email: "clement.mauperon@etu.u-paris.fr"
-        },
-        success: (retour) => {
-            CARTE.setView([retour[0].lat, retour[0].lon], ZOOM_MIN);
-            CARTE.setMaxBounds(L.latLngBounds(
-                [Number(retour[0].boundingbox[1]) + 0.14, Number(retour[0].boundingbox[3]) + 0.4],
-                [Number(retour[0].boundingbox[0]) - 0.15, Number(retour[0].boundingbox[2]) - 0.5]
-            ));
-        },
-        error: (erreur) => { console.error(erreur); }
-    });
-    // Chargement des carreaux depuis OpenStreetMap.
-    L.tileLayer(
-        'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
-        {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            minZoom: ZOOM_MIN
-        }
-    ).addTo(CARTE);
-}
-$(charger_carte);
 
 // API
 const ICONE_TAILLE = [32, 32];
@@ -117,4 +83,41 @@ function charger_contenu_carte()
     points_nat();
     points_cult();
 }
-$().ready(charger_contenu_carte);
+
+// CARTE
+const ZOOM_MIN = 8;
+const NOMINATIM = "https://nominatim.openstreetmap.org/";
+function charger_carte()
+{
+    // Paramètrage de la carte via Nominatim.
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: NOMINATIM + "search",
+        data: {
+            format: "json",
+            "accept-language": "fr-fr",
+            q: "corse",
+            email: "clement.mauperon@etu.u-paris.fr"
+        },
+        success: (retour) => {
+            CARTE.setView([retour[0].lat, retour[0].lon], ZOOM_MIN);
+            CARTE.setMaxBounds(L.latLngBounds(
+                [Number(retour[0].boundingbox[1]) + 0.14, Number(retour[0].boundingbox[3]) + 0.4],
+                [Number(retour[0].boundingbox[0]) - 0.15, Number(retour[0].boundingbox[2]) - 0.5]
+            ));
+        },
+        error: (erreur) => { console.error(erreur); }
+    });
+    // Chargement des carreaux depuis OpenStreetMap.
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
+        {
+            attribution: '&copy; : <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> ',
+            minZoom: ZOOM_MIN
+        }
+    ).addTo(CARTE);
+
+    charger_contenu_carte();
+}
+$(charger_carte);

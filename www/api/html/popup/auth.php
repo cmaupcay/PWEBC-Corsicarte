@@ -5,9 +5,9 @@
                     <h2>Connexion</h2>
                     <form class="auth" method="post">
                         <label for="<?= Auth::ID ?>">Identifiant</label>
-                        <input type="text" name="<?= Auth::ID ?>" id="<?= Auth::ID ?>" required>
+                        <input type="text" name="<?= Auth::ID ?>" id="<?= Auth::ID ?>" required placeholder="Votre nom d'utilisateur">
                         <label for="<?= Auth::MDP ?>">Mot de passe</label>
-                        <input type="password" name="<?= Auth::MDP ?>" id="<?= Auth::MDP ?>" required>
+                        <input type="password" name="<?= Auth::MDP ?>" id="<?= Auth::MDP ?>" required placeholder="Mot de passe secret et sécurisé">
                         <p id="erreur"><i></i></p>
                         <input type="button" name="connexion" id="connexion" value="Se connecter">
                     </form>
@@ -19,10 +19,10 @@
                     <h2>Inscription</h2>
                     <form class="auth" method="post">
                         <label for="<?= Auth::ID ?>">Identifiant</label>
-                        <input type="text" name="<?= Auth::ID ?>" id="<?= Auth::ID ?>" required>
+                        <input type="text" name="<?= Auth::ID ?>" id="<?= Auth::ID ?>" required placeholder="Votre petit nom">
                         <label for="<?= Auth::MDP ?>">Mot de passe</label>
-                        <input type="password" name="<?= Auth::MDP ?>" id="<?= Auth::MDP ?>" required>
-                        <input type="password" name="<?= Auth::MDP ?>-2" id="<?= Auth::MDP ?>-2" required>
+                        <input type="password" name="<?= Auth::MDP ?>" id="<?= Auth::MDP ?>" required placeholder="Votre mot de passe secret (et sécurisé)">
+                        <input type="password" name="<?= Auth::MDP ?>-2" id="<?= Auth::MDP ?>-2" required placeholder="Le même mot de passe pour être sûr">
                         <p id="erreur"><i></i></p>
                         <input type="button" name="inscription" id="inscription" value="S'inscrire">
                     </form>
