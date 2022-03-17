@@ -37,7 +37,7 @@ function popup_ouvrir(id)
 
 function lien(cible) { $(cible).click(function() { window.open($(this).attr("href")); }); }
 
-export function charger()
+function charger()
 {
     // Le titre et le logo du footer ont la même fonction de clique.
     lien("header div#conteneur-titre h1#titre, footer div#credits ul li#corse");
@@ -46,3 +46,4 @@ export function charger()
     // Petite promo
     lien("footer div#credits ul li#prost, footer div#credits ul li#mauperon");
 }
+$(charger)

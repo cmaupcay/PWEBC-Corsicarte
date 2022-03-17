@@ -21,8 +21,9 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     <!-- Local (relatif à l'index publique) -->
-    <script src="../js/index.js" type="module"></script>
-    <script src="../js/auth.js"></script> <!-- En dehors de index.js car doit être accessible au popup d'authentification. -->
+    <script src="../js/auth.js"></script>
+    <script src="../js/carte.js"></script>
+    <script src="../js/nav.js"></script>
 
 </body>
 </html>

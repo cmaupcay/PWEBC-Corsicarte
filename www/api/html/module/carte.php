@@ -1,5 +1,5 @@
 
     <!-- Contenu -->
     <section id="page">
-        <div id="map"></div>
+        <div id="carte"></div>
     </section>

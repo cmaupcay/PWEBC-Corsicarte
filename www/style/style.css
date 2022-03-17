@@ -10,12 +10,12 @@
     margin: 0;
     padding: 0;
     user-select: none;
-    overflow: hidden;
     transition: all 0.2s ease;
     font-family: 'Verdana', 'Geneva', 'Tahoma', 'sans-serif';
 }
 
 body {
+    overflow: hidden;
     height: 100vh;
     width: 100vw;
     background-color: var(--col-1);
@@ -78,10 +78,11 @@ section#popup div#fenetre h4#fermer:hover {
     letter-spacing: 0.8vw;
 }
 
-section#popup div#fenetre div#contenu div.vues { display: none; }
+section#popup div#fenetre div#contenu div.vues {
+    display: none;
+}
 
-section#popup div#fenetre div#contenu div#vue-inscription
-{
+section#popup div#fenetre div#contenu div#vue-inscription {
     opacity: 0;
     visibility: hidden;
     display: none;
@@ -137,8 +138,7 @@ section button:hover {
     color: var(--col-3);
 }
 
-section form p#erreur
-{
+section form p#erreur {
     text-align: center;
     margin-bottom: -2.5rem;
     color: red;
@@ -207,8 +207,21 @@ section#page {
     margin: 0 4vw
 }
 
-section#page div#map {
+section#page div#carte {
     height: 100%;
+}
+
+section#page div#carte * {
+    user-select: unset;
+    transition: unset;
+}
+
+section#page div#carte .leaflet-marker-icon
+{
+  border-radius: 50%;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0.2, 0.4);
+  -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0.2, 0.4);
+  -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0.2, 0.4);
 }
 
 footer {
