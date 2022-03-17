@@ -1,13 +1,26 @@
 const CARTE = L.map('carte');
-const GEO_CORSE = [42.08467137732747, 9.026854657042184];
 const ZOOM_MIN = 8;
-const LIMITES = L.latLngBounds([43.15, 8], [41.15, 10.25]);
-
+const NOMINATIM = "https://nominatim.openstreetmap.org/";
 function charger_carte()
 {
-    // Paramètrage de la carte.
-    CARTE.setMaxBounds(LIMITES);
-    CARTE.setView(GEO_CORSE, ZOOM_MIN);
+    // Paramètrage de la carte via Nominatim.
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: NOMINATIM + "search",
+        data: {
+            format: "json",
+            q: "corse"
+        },
+        success: (retour) => {
+            CARTE.setView([retour[0].lat, retour[0].lon], ZOOM_MIN);
+            CARTE.setMaxBounds(L.latLngBounds(
+                [Number(retour[0].boundingbox[1]) + 0.14, Number(retour[0].boundingbox[3]) + 0.4]),
+                [Number(retour[0].boundingbox[0]) - 0.15, Number(retour[0].boundingbox[2]) - 0.5],
+            );
+        },
+        error: (erreur) => { console.error(erreur); }
+    });
     // Chargement des carreaux depuis OpenStreetMap.
     L.tileLayer(
         'https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',
