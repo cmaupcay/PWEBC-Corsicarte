@@ -10,7 +10,9 @@ function charger_carte()
         url: NOMINATIM + "search",
         data: {
             format: "json",
-            q: "corse"
+            "accept-language": "fr-fr",
+            q: "corse",
+            email: "clement.mauperon@etu.u-paris.fr"
         },
         success: (retour) => {
             CARTE.setView([retour[0].lat, retour[0].lon], ZOOM_MIN);
@@ -47,14 +49,16 @@ function points_api(url, titre, icone, contenu, geo)
                 let t = titre(ligne.fields);
                 if (!!c && !!g && !!t)
                 {
-                    let popup = L.popup().setContent(c);
-                    L.marker(g, {
+                    let m = L.marker(g, {
                         title: t,
                         icon: L.icon({
                             iconUrl: "../img/icones/" + icone + ".png",
                             iconSize: ICONE_TAILLE
                         })
-                    }).addTo(CARTE).bindPopup(popup);
+                    })
+                    m.addTo(CARTE)
+                    m.bindPopup(L.popup().setContent(c));
+                    m.bindTooltip(t);
                 }
             });
         },
