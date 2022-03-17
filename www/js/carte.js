@@ -17,9 +17,9 @@ function charger_carte()
         success: (retour) => {
             CARTE.setView([retour[0].lat, retour[0].lon], ZOOM_MIN);
             CARTE.setMaxBounds(L.latLngBounds(
-                [Number(retour[0].boundingbox[1]) + 0.14, Number(retour[0].boundingbox[3]) + 0.4]),
-                [Number(retour[0].boundingbox[0]) - 0.15, Number(retour[0].boundingbox[2]) - 0.5],
-            );
+                [Number(retour[0].boundingbox[1]) + 0.14, Number(retour[0].boundingbox[3]) + 0.4],
+                [Number(retour[0].boundingbox[0]) - 0.15, Number(retour[0].boundingbox[2]) - 0.5]
+            ));
         },
         error: (erreur) => { console.error(erreur); }
     });
