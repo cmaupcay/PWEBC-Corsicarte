@@ -2,8 +2,8 @@
             <div id="contenu">
                 <h2 id="informations">Informations</h2>
                 <p class="plein">
-                    L'application <b>Corsicarte</b> a été développé au cours de dernier semestre de <i>DUT Informatique</i>
-                    à l'IUT Rives-de-Seine de l'Université Paris Cité, dans le cadre du cours de <i>Programmation Web Client</i>.
+                    L'application <b>Corsicarte</b> a été développé au cours de notre dernier semestre de <b>DUT Informatique</b>
+                    à l'IUT Rives-de-Seine de l'<b>Université Paris Cité</b>, dans le cadre du cours de <b>Programmation Web Client</b>.
                     Elle est fait de sorte à exploiter au maximum <b>jQuery</b>, et particulièrement les requêtes <b>AJAX</b>.
                 </p>
                 <h3 id="bibliotheques">Bibliothèques</h3>
@@ -16,6 +16,10 @@
                     </li>
                     <li>
                         <button id="leaflet" href="https://leafletjs.com/">Leaflet</button>
+                    </li>
+                    <li>
+                        <button id="leaflet" href="https://leafletjs.com/">Leaflet.markercluster</button>
+                        <p>Formation automatique de groupe de marqueurs.</p>
                     </li>
                 </ul>
                 

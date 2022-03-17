@@ -35,7 +35,7 @@ function popup_ouvrir(id)
     $(POPUP_DIV).css("visibility", "visible");
 }
 
-function lien(cible) { $(cible).click(function() { window.open($(this).attr("href")); }); console.log($(cible).attr("href")) }
+function lien(cible) { $(cible).click(function() { window.open($(this).attr("href")); }); }
 
 function charger()
 {

@@ -234,7 +234,7 @@ section#page {
 }
 
 section#page div#carte {
-    height: 100%;
+    height: 90%;
 }
 
 section#page div#carte * {
@@ -248,6 +248,20 @@ section#page div#carte .leaflet-marker-icon
   box-shadow: 1px 1px 4px rgba(0, 0, 0.2, 0.4);
   -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0.2, 0.4);
   -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0.2, 0.4);
+}
+
+section#page div#carte-infos
+{
+    height: 10%;
+    background-color: var(--col-3);
+    text-align: center;
+    padding: 0.25vh 0.5vw;
+}
+section#page div#carte-infos div#infos-m
+{
+    color: var(--col-0);
+    font-size: 0.85rem;
+    user-select: text;
 }
 
 footer {
