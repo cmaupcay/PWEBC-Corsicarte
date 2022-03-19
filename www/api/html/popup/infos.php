@@ -2,9 +2,9 @@
             <div id="contenu">
                 <h2 id="informations">Informations</h2>
                 <p class="plein">
-                    L'application <b>Corsicarte</b> a été développé au cours de notre dernier semestre de <b>DUT Informatique</b>
+                    L'application <b>Corsicarte</b> a été développée au cours de notre dernier semestre de <b>DUT Informatique</b>
                     à l'IUT Rives-de-Seine de l'<b>Université Paris Cité</b>, dans le cadre du cours de <b>Programmation Web Client</b>.
-                    Elle est fait de sorte à exploiter au maximum <b>jQuery</b>, et particulièrement les requêtes <b>AJAX</b>.
+                    Elle est faite de sorte à exploiter au maximum <b>jQuery</b>, et particulièrement les requêtes <b>AJAX</b>.
                 </p>
                 <h3 id="bibliotheques">Bibliothèques</h3>
                 <ul class="boutons">
