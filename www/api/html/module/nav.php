@@ -16,7 +16,7 @@
     <!-- Navigation -->
     <header>
         <div id="conteneur-titre">
-            <h1 id="titre" href="https://www.visit-corsica.com/"><span>Corsica</span>rte</h1>
+            <h1 id="titre" href="https://github.com/tensaiji/PWEBC-Corsicarte/"><span>Corsica</span>rte</h1>
         </div>
         <div id="conteneur-nav">
             <nav>

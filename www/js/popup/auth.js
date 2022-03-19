@@ -35,48 +35,55 @@ $(() => {
             },
             success: (retour) => {
                 let favoris = $("div#vue-profil #favoris");
-                favoris.html("<i>Chargement de vos favoris...</i>");
-                let liste = "";
                 let attendus = retour.length;
-                let charges = 0;
-                retour.forEach(fav => {
-                    $.ajax({
-                        type: "GET",
-                        dataType: "json",
-                        url: NOMINATIM + '/reverse',
-                        data: {
-                            format: NOMINATIM_FORMAT,
-                            email: NOMINATIM_EMAIL,
-                            "accept-language": LANG,
-                            lat: fav[0],
-                            lon: fav[1]
-                        },
-                        success: (retour) => {
-                            liste += (
-                                '<li><button lat="' + fav[0] + '" lng="' + fav[1] + '">'
-                                + retour.display_name.split(', ')[0]
-                                + "</button></li>\n"
-                            );
-                            if (++charges === attendus)
-                            {
-                                favoris.html(liste);
-                                $("div#vue-profil #favoris li").click((e) => {
-                                    let lat = e.target.getAttribute('lat');
-                                    let lng = e.target.getAttribute('lng');
-                                    CARTE.setView([lat, lng], 14);
-                                    popup_fermer();
-                                    infos({
-                                        latlng: {
-                                            lat: lat,
-                                            lng: lng
-                                        }
-                                    })
-                                });
-                            }
-                        },
-                        error: (err) => { console.error("Impossible de résoudre l'adresse du favori : " + err.status) }
+                if (attendus === 0)
+                {
+                    favoris.html("<i>Aucun favori enregistré.</i>");
+                }
+                else
+                {
+                    favoris.html("<i>Chargement de vos favoris...</i>");
+                    let liste = "";
+                    let charges = 0;
+                    retour.forEach(fav => {
+                        $.ajax({
+                            type: "GET",
+                            dataType: "json",
+                            url: NOMINATIM + '/reverse',
+                            data: {
+                                format: NOMINATIM_FORMAT,
+                                email: NOMINATIM_EMAIL,
+                                "accept-language": LANG,
+                                lat: fav[0],
+                                lon: fav[1]
+                            },
+                            success: (retour) => {
+                                liste += (
+                                    '<li><button lat="' + fav[0] + '" lng="' + fav[1] + '">'
+                                    + retour.display_name.split(', ')[0]
+                                    + "</button></li>\n"
+                                );
+                                if (++charges === attendus)
+                                {
+                                    favoris.html(liste);
+                                    $("div#vue-profil #favoris li").click((e) => {
+                                        let lat = e.target.getAttribute('lat');
+                                        let lng = e.target.getAttribute('lng');
+                                        CARTE.setView([lat, lng], 14);
+                                        popup_fermer();
+                                        infos({
+                                            latlng: {
+                                                lat: lat,
+                                                lng: lng
+                                            }
+                                        })
+                                    });
+                                }
+                            },
+                            error: (err) => { console.error("Impossible de résoudre l'adresse du favori : " + err.status) }
+                        });
                     });
-                });
+                }
             },
             error: (err) => { console.error("Impossible de récupérer la liste des favoris : " + err.status); }
         });

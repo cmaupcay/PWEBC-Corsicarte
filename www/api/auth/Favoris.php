@@ -77,7 +77,9 @@ abstract class Favoris
         {
             $id = Auth::hash($id);
             $json = self::lire($id);
-            unset($json[$index]);
+            $dernier = count($json) - 1;
+            $json[$index] = $json[$dernier];
+            unset($json[$dernier]);
             return self::ecrire($id, $json);
         }
         return false;
