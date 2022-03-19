@@ -36,16 +36,41 @@ function meteo(lat, lon)
 const INFOS = "section#page #carte-infos #infos-m";
 const INFOS_DEF = "<i>Sélectionner un point pour obtenir plus de détails.</i>";
 var INFOS_ACTIVE = undefined;
+const FAV = "section#page #carte-infos #actions button#favori";
+const FAV_NON = "&#9734;";
+const FAV_OUI = "&#9733;";
+function maj_favori_actif()
+{
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: AUTH_API + "favoris/verif.php",
+        data: {
+            id: $.cookie(ID_COOKIE),
+            lat: INFOS_ACTIVE.lat,
+            lng: INFOS_ACTIVE.lng
+        },
+        success: (retour) => {
+            let fav = $(FAV);
+            if (retour.succes) { fav.html(FAV_OUI); }
+            else { fav.html(FAV_NON); }
+        },
+        error: (err) => { console.error("Impossible de mettre à jour l'état du point : " + err.status); }
+    });
+}
 function infos(e)
 {
     let infos = $(INFOS);
+    let fav = $(FAV);
     if (INFOS_ACTIVE === e.latlng)
     { 
         INFOS_ACTIVE = undefined;
-        $(INFOS).html(INFOS_DEF);
+        infos.html(INFOS_DEF);
+        fav.attr('hidden', '');
     }
     else
     {
+        fav.removeAttr('hidden');
         INFOS_ACTIVE = e.latlng;
         infos.html("<i>Chargement des informations...</i>");
         $.ajax({
@@ -69,12 +94,55 @@ function infos(e)
                 infos.html("<i>Impossible de résoudre l'adresse du point (" + err.status + ").");
             }
         });
+        maj_favori_actif();
     }
-
+}
+function favori(e)
+{
+    if (!!INFOS_ACTIVE && verifier()) // Un point est sélectionné et l'utilisateur est connecté.
+    {
+        let id = $.cookie(ID_COOKIE);
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: AUTH_API + "favoris/verif.php",
+            data: {
+                id: id,
+                lat: INFOS_ACTIVE.lat,
+                lng: INFOS_ACTIVE.lng
+            },
+            success: (retour) => {
+                let action = undefined;
+                if (retour.succes) { action = "supprimer"; }
+                else { action = "ajouter"; }
+                let fav = $(FAV);
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: AUTH_API + "favoris/" + action + ".php",
+                    data: {
+                        id: id,
+                        lat: INFOS_ACTIVE.lat,
+                        lng: INFOS_ACTIVE.lng
+                    },
+                    success: (retour) => {
+                        if (retour.succes) { maj_favori_actif(); }
+                        else { console.error("Impossible de modifier l'état du point : " + err.status); }
+                    },
+                    error: (err) => { console.error("Impossible de modifier l'état du point : " + err.status); }
+                });
+            },
+            error: (err) => { console.error("Impossible de vérifier l'état du point : " + err.status); }
+        });
+    }
 }
 function charger_outils_carte()
 {
-    $(INFOS).html(INFOS_DEF); // Affichage de la valeur par défaut.
+    // Affichage des valeurs par défaut.
+    $(INFOS).html(INFOS_DEF);
+    let fav = $(FAV)
+    fav.html(FAV_NON);
+    fav.click(favori);
 }
 
 // CONTENU

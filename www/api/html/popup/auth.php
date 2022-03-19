@@ -39,5 +39,10 @@
                     <form class="auth" method="post">
                         <input type="button" name="deconnexion" id="deconnexion" value="Se déconnecter">
                     </form>
+                    <div id="conteneur-favoris">
+                        <h3>Favoris</h3>
+                        <ul id="favoris" class="boutons">
+                        </ul>
+                    </div>
                 </div>
             </div>

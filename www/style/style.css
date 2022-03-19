@@ -240,6 +240,8 @@ section#page div#carte {
 section#page div#carte * {
     user-select: unset;
     transition: unset;
+    color: unset;
+    letter-spacing: unset;
 }
 
 section#page div#carte .leaflet-marker-icon
@@ -256,12 +258,23 @@ section#page div#carte-infos
     background-color: var(--col-3);
     text-align: center;
     padding: 0.25vh 0.5vw;
+    display: flex;
+}
+section#page div#carte-infos div#infos
+{
+    display: block;
+    width: 90%;
 }
 section#page div#carte-infos div#infos-m
 {
     color: var(--col-0);
     font-size: 0.85rem;
     user-select: text;
+}
+section#page div#carte-infos div#actions
+{
+    display: block;
+    width: 10%;
 }
 
 footer {

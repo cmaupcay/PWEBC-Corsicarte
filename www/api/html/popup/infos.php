@@ -41,4 +41,12 @@
                         <p>Données météorologiques.</p>
                     </li>
                 </ul>
+
+                <h3 id="graphiques">Graphiques</h3>
+                <ul class="boutons">
+                    <li>
+                        <button id="flaticon" href="https://www.flaticon.com/">Flaticon</button>
+                        <p>Icônes de carte.</p>
+                    </li>
+                </ul>
             </div>

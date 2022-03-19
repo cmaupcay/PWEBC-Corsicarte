@@ -7,7 +7,7 @@
     
     <title>CORSICARTE | Découvrez la Corse autrement</title>
     <link rel="shortcut icon" href="../img/nav/icone.ico" type="image/x-icon">
-    <meta name="description" content="Corsicarte est une application JavaScript qui vous permet de préparer au mieux vos expéditions sur l'Île de Beauté !">
+    <meta name="description" content="Corsicarte est une application qui vous permet de préparer au mieux vos expéditions sur l'Île de Beauté !">
 
     <!-- CSS -->
     <!-- Local (relatif à l'index publique) -->
