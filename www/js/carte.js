@@ -99,41 +99,45 @@ function infos(e)
 }
 function favori(e)
 {
-    if (!!INFOS_ACTIVE && verifier()) // Un point est sélectionné et l'utilisateur est connecté.
+    if (!!INFOS_ACTIVE) // Un point est sélectionné et l'utilisateur est connecté.
     {
-        let id = $.cookie(ID_COOKIE);
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            url: AUTH_API + "favoris/verif.php",
-            data: {
-                id: id,
-                lat: INFOS_ACTIVE.lat,
-                lng: INFOS_ACTIVE.lng
-            },
-            success: (retour) => {
-                let action = undefined;
-                if (retour.succes) { action = "supprimer"; }
-                else { action = "ajouter"; }
-                let fav = $(FAV);
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: AUTH_API + "favoris/" + action + ".php",
-                    data: {
-                        id: id,
-                        lat: INFOS_ACTIVE.lat,
-                        lng: INFOS_ACTIVE.lng
-                    },
-                    success: (retour) => {
-                        if (retour.succes) { maj_favori_actif(); }
-                        else { console.error("Impossible de modifier l'état du point : " + err.status); }
-                    },
-                    error: (err) => { console.error("Impossible de modifier l'état du point : " + err.status); }
-                });
-            },
-            error: (err) => { console.error("Impossible de vérifier l'état du point : " + err.status); }
-        });
+        if (verifier())
+        {
+            let id = $.cookie(ID_COOKIE);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: AUTH_API + "favoris/verif.php",
+                data: {
+                    id: id,
+                    lat: INFOS_ACTIVE.lat,
+                    lng: INFOS_ACTIVE.lng
+                },
+                success: (retour) => {
+                    let action = undefined;
+                    if (retour.succes) { action = "supprimer"; }
+                    else { action = "ajouter"; }
+                    let fav = $(FAV);
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: AUTH_API + "favoris/" + action + ".php",
+                        data: {
+                            id: id,
+                            lat: INFOS_ACTIVE.lat,
+                            lng: INFOS_ACTIVE.lng
+                        },
+                        success: (retour) => {
+                            if (retour.succes) { maj_favori_actif(); }
+                            else { console.error("Impossible de modifier l'état du point : " + err.status); }
+                        },
+                        error: (err) => { console.error("Impossible de modifier l'état du point : " + err.status); }
+                    });
+                },
+                error: (err) => { console.error("Impossible de vérifier l'état du point : " + err.status); }
+            });
+        }
+        else { popup_ouvrir("auth"); }
     }
 }
 function charger_outils_carte()
